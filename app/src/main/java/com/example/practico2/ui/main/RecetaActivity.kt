@@ -2,7 +2,7 @@ package com.example.practico2.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toasimport androidx.activity.viewModels
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
