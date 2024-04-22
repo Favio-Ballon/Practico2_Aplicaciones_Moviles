@@ -11,32 +11,19 @@ class MainViewModel: ViewModel(){
     }
     val IngredienteList: LiveData<ArrayList<Ingrediente>> get() = _IngredienteList
 
-
-    fun updateIngrediente1(ingredienteNombre: String) {
-        val list = _IngredienteList.value
-        val index = list?.indexOfFirst { it.ingrediente1 == ingredienteNombre }
-        if (index != null) {
-            list[index].ingrediente1Pressed = !list[index].ingrediente1Pressed
-        }
-        _IngredienteList.value = list
+    private val _lstVerReceta: MutableLiveData<ArrayList<String>> by lazy {
+        MutableLiveData<ArrayList<String>>(null)
     }
-    fun updateIngrediente2(ingredienteNombre: String) {
-        val list = _IngredienteList.value
-        val index = list?.indexOfFirst { it.ingrediente2 == ingredienteNombre }
-        if (index != null) {
-            list[index].ingrediente2Pressed = !list[index].ingrediente2Pressed
-        }
-        _IngredienteList.value = list
-    }
+    val lstVerReceta: LiveData<ArrayList<String>> get() = _lstVerReceta
 
     fun loadIngredientes() {
         _IngredienteList.value = arrayListOf(
             Ingrediente(
-               "Leche",
+                "Leche",
                 false,
                 "Huevo",
                 false
-        ),
+            ),
             Ingrediente(
                 "Azucar",
                 false,
@@ -58,10 +45,45 @@ class MainViewModel: ViewModel(){
             Ingrediente(
                 "Polvo de hornear",
                 false,
-                "Vainilla",
+                "Aceite",
+                false
+            ),
+            Ingrediente(
+                "Tomate",
+                false,
+                "Queso",
                 false
             )
         )
     }
+    fun updateIngrediente1(ingredienteNombre: String) {
+        val list = _IngredienteList.value
+        val index = list?.indexOfFirst { it.ingrediente1 == ingredienteNombre }
+        if (index != null) {
+            list[index].ingrediente1Pressed = !list[index].ingrediente1Pressed
+        }
+        _IngredienteList.value = list
+    }
+    fun updateIngrediente2(ingredienteNombre: String) {
+        val list = _IngredienteList.value
+        val index = list?.indexOfFirst { it.ingrediente2 == ingredienteNombre }
+        if (index != null) {
+            list[index].ingrediente2Pressed = !list[index].ingrediente2Pressed
+        }
+        _IngredienteList.value = list
+    }
 
+    fun verRecetas() {
+        val list = _IngredienteList.value
+        val lstVerReceta = arrayListOf<String>()
+        list?.forEach {
+            if (it.ingrediente1Pressed) {
+                lstVerReceta.add(it.ingrediente1)
+            }
+            if (it.ingrediente2Pressed){
+                lstVerReceta.add(it.ingrediente2)
+            }
+        }
+        _lstVerReceta.value = lstVerReceta
+    }
 }

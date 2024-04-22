@@ -1,5 +1,6 @@
 package com.example.practico2.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(), IngredienteAdapter.OnIngredienteClickL
 
     private fun setUpButton() {
         binding.btnVerRecetas.setOnClickListener {
-            //todo
+            onBtnVerRecetasClick()
         }
     }
 
@@ -43,6 +44,13 @@ class MainActivity : AppCompatActivity(), IngredienteAdapter.OnIngredienteClickL
             adapter.clear()
             if (it != null) {
                 adapter.addAll(it)
+            }
+        }
+        model.lstVerReceta.observe(this) {
+            if (it != null) {
+                val intent = Intent(this, RecetaActivity::class.java)
+                intent.putExtra("recetas", it)
+                startActivity(intent)
             }
         }
     }
@@ -58,6 +66,9 @@ class MainActivity : AppCompatActivity(), IngredienteAdapter.OnIngredienteClickL
         }
     }
 
+    private fun onBtnVerRecetasClick() {
+        model.verRecetas()
+    }
     override fun onBtn1Click(ingrediente: Ingrediente) {
         model.updateIngrediente1(ingrediente.ingrediente1)
 
@@ -66,4 +77,5 @@ class MainActivity : AppCompatActivity(), IngredienteAdapter.OnIngredienteClickL
     override fun onBtn2Click(ingrediente: Ingrediente) {
         model.updateIngrediente2(ingrediente.ingrediente2)
     }
+
 }
