@@ -25,27 +25,27 @@ class MainViewModel: ViewModel(){
                 false
             ),
             Ingrediente(
-                "Azucar",
+                "Papa",
                 false,
                 "Harina",
                 false
             ),
             Ingrediente(
-                "Sal",
+                "Carne",
                 false,
-                "Aceite",
+                "Arroz",
                 false
             ),
             Ingrediente(
-                "Levadura",
+                "Lechuga",
                 false,
                 "Manteca",
                 false
             ),
             Ingrediente(
-                "Polvo de hornear",
+                "Cebolla",
                 false,
-                "Aceite",
+                "Pollo",
                 false
             ),
             Ingrediente(
